@@ -1,25 +1,25 @@
-// src/components/RecommendationForm.jsx
 import React, { useState } from 'react';
-import '../App.css'; // Importez le CSS
+import axios from 'axios';
+import '../App.css';
 
-const RecommendationForm = ({ cvId }) => {
+const RecommendationForm = ({ cvId, userId, onSuccess }) => { // Accept onSuccess as a prop
     const [recommendation, setRecommendation] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`/api/cv/${cvId}/recommendations`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: recommendation }), // Envoyez le texte de la recommandation
+            const response = await axios.post(`http://localhost:3003/api/recommendation`, {
+                cvId, // Include cvId in the request body
+                userId: userId, // Use actual userId
+                comment: recommendation, // Send the recommendation text as comment
             });
-            if (response.ok) {
-                setRecommendation('');
+
+            if (response.status === 201) {
+                setRecommendation(''); // Clear the input field on success
+                onSuccess(); // Call onSuccess to show the toast message and reload
             }
         } catch (error) {
-            console.error('Erreur lors de l\'ajout de la recommandation:', error);
+            console.error('Error adding recommendation:', error);
         }
     };
 

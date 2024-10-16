@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import CVForm from './pages/CVForm';
 import CVList from './pages/CVList';
 import CVDetail from './pages/CVDetails';
+import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/cv/new" element={<CVForm />} />
-          <Route path="/cv/edit/:id" element={<CVForm />} />
           <Route path="/cvs" element={<CVList />} />
-          <Route path="/cv/:id" element={<CVDetail />} />
+          <Route path="/cv/:cvId" element={<CVDetail />} />
+          {/* Protect the following routes */}
+          <Route path="/cv/new" element={<ProtectedRoute><CVForm /></ProtectedRoute>} />
+          <Route path="/cv/edit/:id" element={<ProtectedRoute><CVForm /></ProtectedRoute>} />
         </Routes>
       </div>
     </Router>

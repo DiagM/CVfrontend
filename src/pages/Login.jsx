@@ -15,6 +15,12 @@ export default function LoginPage() {
         try {
             const response = await axios.post('http://localhost:3003/api/auth/login', { email, password });
             console.log('Login successful:', response.data);
+            localStorage.setItem('token', response.data.user.token);
+            localStorage.setItem('userId', response.data.user.id);
+            console.log(response.data.user.id);
+
+            localStorage.setItem('userName', response.data.user.lastname);  // Assuming the last name is in the user object
+
 
             // Show success message and redirect after 2 seconds
             setSuccess(true);

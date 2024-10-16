@@ -1,7 +1,5 @@
-// src/components/CVList.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; // Importez le CSS
 
 const CVList = () => {
     const [cvs, setCvs] = useState([]);
@@ -10,11 +8,11 @@ const CVList = () => {
     useEffect(() => {
         const fetchCVs = async () => {
             try {
-                const response = await fetch('/api/cvs');
+                const response = await fetch('http://localhost:3003/api/cv');
                 const cvData = await response.json();
                 setCvs(cvData);
             } catch (error) {
-                console.error('Erreur lors de la récupération des CVs:', error);
+                console.error('Error fetching CVs:', error);
             }
         };
 
@@ -26,23 +24,88 @@ const CVList = () => {
     );
 
     return (
-        <div>
-            <h2>Liste des CVs</h2>
+        <div style={styles.container}>
+            <h2 style={styles.title}>CV List</h2>
             <input
                 type="text"
-                placeholder="Rechercher par nom et prénom"
+                placeholder="Search by name"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                style={styles.searchInput}
             />
-            <ul>
-                {filteredCvs.map(cv => (
-                    <li key={cv.id}>
-                        <Link to={`/cv/${cv.id}`}>{cv.name} {cv.surname}</Link>
-                    </li>
+            <div style={styles.cardContainer}>
+                {filteredCvs.map((cv) => (
+                    <Link to={`/cv/${cv._id}`} key={cv._id} style={styles.cardLink}>
+                        <div style={styles.card}>
+                            <h3 style={styles.cardTitle}>{cv.name} {cv.surname}</h3>
+                            <p style={styles.cardDetail}><strong>Email:</strong> {cv.email}</p>
+                            <p style={styles.cardDetail}><strong>Phone:</strong> {cv.phone || 'Not provided'}</p>
+                            <p style={styles.cardDetail}><strong>Skills:</strong> {cv.skills.slice(0, 3).join(', ')}{cv.skills.length > 3 ? '...' : ''}</p>
+                            <p style={styles.cardDescription}>{cv.description ? cv.description.substring(0, 100) + '...' : 'No description provided'}</p>
+                        </div>
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </div>
     );
+};
+
+const styles = {
+    container: {
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '20px',
+        fontFamily: 'Arial, sans-serif',
+    },
+    title: {
+        fontSize: '2rem',
+        color: '#2c3e50',
+        marginBottom: '20px',
+        textAlign: 'center',
+    },
+    searchInput: {
+        width: '100%',
+        padding: '10px',
+        fontSize: '1rem',
+        marginBottom: '20px',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
+    },
+    cardContainer: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+        gap: '20px',
+    },
+    cardLink: {
+        textDecoration: 'none',
+        color: 'inherit',
+    },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        padding: '20px',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        ':hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.15)',
+        },
+    },
+    cardTitle: {
+        fontSize: '1.2rem',
+        color: '#2c3e50',
+        marginBottom: '10px',
+    },
+    cardDetail: {
+        fontSize: '0.9rem',
+        color: '#34495e',
+        marginBottom: '5px',
+    },
+    cardDescription: {
+        fontSize: '0.9rem',
+        color: '#7f8c8d',
+        marginTop: '10px',
+    },
 };
 
 export default CVList;
