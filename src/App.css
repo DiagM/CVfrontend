@@ -1,0 +1,56 @@
+/* src/styles/App.css */
+
+form {
+  max-width: 600px; /* Largeur maximale du formulaire */
+  margin: 20px auto; /* Centre le formulaire sur la page */
+  padding: 20px; /* Ajoute de l'espace intérieur */
+  border: 1px solid #ccc; /* Bordure grise autour du formulaire */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du formulaire */
+  background-color: #f9f9f9; /* Couleur de fond claire */
+}
+
+h2 {
+  text-align: center; /* Centre le titre */
+  color: #333; /* Couleur du texte */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea {
+  width: 100%; /* Remplit la largeur du formulaire */
+  padding: 10px; /* Ajoute de l'espace intérieur */
+  margin: 10px 0; /* Ajoute de l'espace autour des éléments */
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 4px; /* Coins arrondis */
+  font-size: 16px; /* Taille de police */
+}
+
+button {
+  width: 100%; /* Laisser la largeur à 100% pour un bouton principal */
+  padding: 10px;
+  margin: 10px 0; /* Ajoute de l'espace entre les boutons */
+  background-color: #007bff; /* Couleur de fond */
+  border: none; /* Pas de bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Changer le curseur au survol */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Transition douce */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre */
+  opacity: 1; /* Opaque */
+}
+
+button:hover {
+  background-color: #0056b3; /* Couleur au survol */
+  box-shadow: 0 6px 8px rgba(7, 5, 5, 0.15); /* Ombre plus marquée au survol */
+}
+
+label {
+  display: flex; /* Flexbox pour l'étiquette */
+  align-items: center; /* Centre verticalement le contenu */
+  margin-top: 10px; /* Ajoute de l'espace au-dessus */
+}
+
+label input[type="checkbox"] {
+  margin-right: 10px; /* Ajoute de l'espace à droite du checkbox */
+}
