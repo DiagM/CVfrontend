@@ -66,6 +66,7 @@ export default function Navbar() {
             <div>
                 {token ? (
                     <>
+                        <Link to="/cv/mycv" style={linkStyle}>My CVs</Link>
                         <Link to="/cvs" style={linkStyle}>All CVs</Link>
                         <Link to="/cv/new" style={linkStyle}>Create CV</Link>
 
