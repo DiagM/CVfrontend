@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env': {
-      PORT: 3003, // or any other environment variable you want to define
+      PORT: 10000, // or any other environment variable you want to define
     },
   },
 })
