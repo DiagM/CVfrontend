@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
+const port = process.env.PORT || '3000';
 
 const RecommendationForm = ({ cvId, userId, onSuccess }) => { // Accept onSuccess as a prop
     const [recommendation, setRecommendation] = useState('');
@@ -8,7 +9,7 @@ const RecommendationForm = ({ cvId, userId, onSuccess }) => { // Accept onSucces
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:3003/api/recommendation`, {
+            const response = await axios.post(`http://localhost:${port}/api/recommendation`, {
                 cvId, // Include cvId in the request body
                 userId: userId, // Use actual userId
                 comment: recommendation, // Send the recommendation text as comment

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+const port = process.env.PORT || '3000';
 
 const CVList = () => {
     const [cvs, setCvs] = useState([]);
@@ -8,7 +9,7 @@ const CVList = () => {
     useEffect(() => {
         const fetchCVs = async () => {
             try {
-                const response = await fetch('http://localhost:3003/api/cv');
+                const response = await fetch(`http://localhost:${port}/api/cv`);
                 const cvData = await response.json();
                 setCvs(cvData);
             } catch (error) {

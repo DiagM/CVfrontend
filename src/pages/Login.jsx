@@ -8,18 +8,21 @@ export default function LoginPage() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate(); // For redirection
+    const port = process.env.PORT || '3000';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(''); // Clear any previous errors
         try {
-            const response = await axios.post('http://localhost:3003/api/auth/login', { email, password });
+            const response = await axios.post(`http://localhost:${port}/api/auth/login`, { email, password });
             console.log('Login successful:', response.data);
             localStorage.setItem('token', response.data.user.token);
             localStorage.setItem('userId', response.data.user.id);
+            localStorage.setItem('email', response.data.user.email);
             console.log(response.data.user.id);
 
             localStorage.setItem('userName', response.data.user.lastname);  // Assuming the last name is in the user object
+            localStorage.setItem('userFirstName', response.data.user.firstname);  // Assuming the last name is in the user object
 
 
             // Show success message and redirect after 2 seconds

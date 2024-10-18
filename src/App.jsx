@@ -8,6 +8,7 @@ import CVForm from './pages/CVForm';
 import MyCV from './pages/MyCV';
 import CVList from './pages/CVList';
 import CVDetail from './pages/CVDetails';
+import Profile from './pages/EditProfile';
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           {/* Protect the following routes */}
           <Route path="/cv/mycv" element={<ProtectedRoute><MyCV /></ProtectedRoute>} />
           <Route path="/cv/new" element={<ProtectedRoute><CVForm /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/cv/edit/:id" element={<ProtectedRoute><CVForm /></ProtectedRoute>} />
         </Routes>
       </div>

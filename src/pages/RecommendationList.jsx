@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+const port = process.env.PORT || '3000';
 
 const RecommendationList = ({ cvId }) => {
     const [recommendations, setRecommendations] = useState([]);
 
     useEffect(() => {
         const fetchRecommendations = async () => {
-            const response = await axios.get(`http://localhost:3000/api/cv/${cvId}/recommendations`);
+            const response = await axios.get(`http://localhost:${port}/api/cv/${cvId}/recommendations`);
             setRecommendations(response.data);
         };
         fetchRecommendations();

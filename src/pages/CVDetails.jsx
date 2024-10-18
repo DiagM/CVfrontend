@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import RecommendationForm from './RecommendationForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const port = process.env.PORT || '3000';
 
 export default function CVDetails() {
     const { cvId } = useParams();
@@ -14,7 +15,7 @@ export default function CVDetails() {
     useEffect(() => {
         const fetchCV = async () => {
             try {
-                const response = await fetch(`http://localhost:3003/api/cv/${cvId}`);
+                const response = await fetch(`http://localhost:${port}/api/cv/${cvId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error: ${response.status}`);
                 }
@@ -27,7 +28,7 @@ export default function CVDetails() {
 
         const fetchRecommendations = async () => {
             try {
-                const response = await fetch(`http://localhost:3003/api/recommendation/${cvId}`);
+                const response = await fetch(`http://localhost:${port}/api/recommendation/${cvId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error: ${response.status}`);
                 }
@@ -53,7 +54,7 @@ export default function CVDetails() {
         if (window.confirm('Are you sure you want to delete this CV?')) {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`http://localhost:3003/api/cv/${cvId}`, {
+                const response = await fetch(`http://localhost:${port}/api/cv/${cvId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
