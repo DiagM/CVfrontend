@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '1001';
 
 const CVList = () => {
     const [cvs, setCvs] = useState([]);

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SwaggerLink = () => {
-    const port = process.env.PORT || '3000';
+    const port = process.env.PORT || '1001';
     const swaggerUrl = `http://localhost:${port}/api-docs`;
 
     return (

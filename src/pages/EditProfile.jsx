@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';  // Import Toastify
 import 'react-toastify/dist/ReactToastify.css';  // Import Toastify CSS
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '1001';
 
 export default function EditProfile() {
     const navigate = useNavigate();

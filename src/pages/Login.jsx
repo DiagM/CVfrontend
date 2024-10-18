@@ -8,7 +8,7 @@ export default function LoginPage() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate(); // For redirection
-    const port = process.env.PORT || '3000';
+    const port = process.env.PORT || '1001';
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '1001';
 
 export default function RegisterPage() {
     const [firstname, setFirstName] = useState('');
@@ -29,7 +29,7 @@ export default function RegisterPage() {
             // Display success notification
             toast.success('Registration successful!', {
                 position: "top-right",
-                autoClose: 3000, // Automatically close after 3 seconds
+                autoClose: 1001, // Automatically close after 3 seconds
             });
 
             // Redirect to login after a delay (for the toast to display)
