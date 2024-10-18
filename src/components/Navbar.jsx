@@ -69,6 +69,7 @@ export default function Navbar() {
                         <Link to="/cv/mycv" style={linkStyle}>My CVs</Link>
                         <Link to="/cvs" style={linkStyle}>All CVs</Link>
                         <Link to="/cv/new" style={linkStyle}>Create CV</Link>
+                        <Link to="/api-docs" style={linkStyle}>docs</Link>
 
                         {/* Dropdown for User's Name and Logout */}
                         <div style={dropdownStyle}>
