@@ -8,7 +8,7 @@ export default defineConfig({
   define: {
     'process.env': {
       PORT: 10000, // You can keep this for local development if needed
-      apiUrl: 'https://cvbackend-ethj.onrender.com', // Correctly define as a string
+      apiUrl: 'http://localhost:3003', // Correctly define as a string
     },
   },
 });

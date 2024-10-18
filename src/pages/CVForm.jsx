@@ -32,7 +32,22 @@ const CVForm = ({ onSubmit, initialData }) => {
                         throw new Error('Failed to fetch CV');
                     }
                     const cvData = await response.json();
-                    setFormData(cvData);
+
+                    // Set form data with fetched CV data
+                    setFormData({
+                        ...cvData,
+                        // Ensure dates are in a format suitable for input
+                        experiences: cvData.experiences.map(exp => ({
+                            ...exp,
+                            startDate: exp.startDate ? exp.startDate.split('T')[0] : '', // Convert to YYYY-MM-DD
+                            endDate: exp.endDate ? exp.endDate.split('T')[0] : '',       // Convert to YYYY-MM-DD
+                        })),
+                        education: cvData.education.map(edu => ({
+                            ...edu,
+                            startDate: edu.startDate ? edu.startDate.split('T')[0] : '', // Convert to YYYY-MM-DD
+                            endDate: edu.endDate ? edu.endDate.split('T')[0] : '',       // Convert to YYYY-MM-DD
+                        })),
+                    });
                 } catch (error) {
                     console.error('Error fetching CV:', error);
                 }
@@ -42,6 +57,7 @@ const CVForm = ({ onSubmit, initialData }) => {
             setFormData(initialData);
         }
     }, [id, initialData]);
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -68,13 +84,29 @@ const CVForm = ({ onSubmit, initialData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate dates for experiences
+        for (const exp of formData.experiences) {
+            if (exp.endDate && new Date(exp.endDate) <= new Date(exp.startDate)) {
+                alert('End date must be after the start date for experiences.');
+                return; // Prevent submission
+            }
+        }
+
+        // Validate dates for education
+        for (const edu of formData.education) {
+            if (edu.endDate && new Date(edu.endDate) <= new Date(edu.startDate)) {
+                alert('End date must be after the start date for education.');
+                return; // Prevent submission
+            }
+        }
+
         try {
             const url = id
                 ? `${apiUrl}/api/cv/${id}`
                 : `${apiUrl}/api/cv`;
             const method = id ? 'PUT' : 'POST';
             const token = localStorage.getItem('token'); // Retrieve the token again for the submit request
-
 
             const response = await fetch(url, {
                 method: method,
@@ -92,6 +124,7 @@ const CVForm = ({ onSubmit, initialData }) => {
             console.error('Error saving CV:', error);
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit} style={styles.form}>
