@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';  // Import Toastify
 import 'react-toastify/dist/ReactToastify.css';  // Import Toastify CSS
 const port = process.env.PORT || '1001';
+const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
 export default function EditProfile() {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function EditProfile() {
         try {
             setIsLoading(true); // Set loading state
 
-            const response = await fetch(`http://localhost:${port}/api/auth/profile/edit`, {
+            const response = await fetch(`${apiUrl}/api/auth/profile/edit`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

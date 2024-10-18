@@ -31,7 +31,7 @@ This is the frontend of the full-stack application built with React and Vite. Th
     ```
 
 3. Create a `.env` file in the root directory and add the following variable:
-
+    you have to change port and url in vite.config file
     ```bash
     VITE_API_URL=https://your-backend-url.com
     ```

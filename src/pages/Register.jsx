@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const port = process.env.PORT || '1001';
+const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
 export default function RegisterPage() {
     const [firstname, setFirstName] = useState('');
@@ -18,7 +19,7 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const response = await axios.post(`http://localhost:${port}/api/auth/register`, {
+            const response = await axios.post(`${apiUrl}/api/auth/register`, {
                 firstname,
                 lastname,
                 email,

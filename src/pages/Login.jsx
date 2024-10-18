@@ -9,12 +9,13 @@ export default function LoginPage() {
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate(); // For redirection
     const port = process.env.PORT || '1001';
+    const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(''); // Clear any previous errors
         try {
-            const response = await axios.post(`http://localhost:${port}/api/auth/login`, { email, password });
+            const response = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
             console.log('Login successful:', response.data);
             localStorage.setItem('token', response.data.user.token);
             localStorage.setItem('userId', response.data.user.id);

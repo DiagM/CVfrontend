@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 const port = process.env.PORT || '1001';
+const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
 const CVForm = ({ onSubmit, initialData }) => {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const CVForm = ({ onSubmit, initialData }) => {
             // If editing, fetch the CV data
             const fetchCV = async () => {
                 try {
-                    const response = await fetch(`http://localhost:${port}/api/cv/${id}`);
+                    const response = await fetch(`${apiUrl}/api/cv/${id}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch CV');
                     }
@@ -69,8 +70,8 @@ const CVForm = ({ onSubmit, initialData }) => {
         e.preventDefault();
         try {
             const url = id
-                ? `http://localhost:${port}/api/cv/${id}`
-                : `http://localhost:${port}/api/cv`;
+                ? `${apiUrl}/api/cv/${id}`
+                : `${apiUrl}/api/cv`;
             const method = id ? 'PUT' : 'POST';
             const token = localStorage.getItem('token'); // Retrieve the token again for the submit request
 

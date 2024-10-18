@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 const port = process.env.PORT || '1001';
+const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
 const MyCV = () => {
     const [cvs, setCvs] = useState([]);
@@ -11,10 +12,10 @@ const MyCV = () => {
         const fetchCVs = async () => {
             try {
                 // If using query params
-                // const response = await fetch(`http://localhost:${port}/api/cv/my?userId=${storedUserId}`);
+                // const response = await fetch(`${apiUrl}/api/cv/my?userId=${storedUserId}`);
 
                 // OR if using dynamic routes
-                const response = await fetch(`http://localhost:${port}/api/cv/user/${storedUserId}`);
+                const response = await fetch(`${apiUrl}/api/cv/user/${storedUserId}`);
 
                 const cvData = await response.json();
                 setCvs(cvData);

@@ -4,6 +4,7 @@ import RecommendationForm from './RecommendationForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const port = process.env.PORT || '1001';
+const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
 export default function CVDetails() {
     const { cvId } = useParams();
@@ -15,7 +16,7 @@ export default function CVDetails() {
     useEffect(() => {
         const fetchCV = async () => {
             try {
-                const response = await fetch(`http://localhost:${port}/api/cv/${cvId}`);
+                const response = await fetch(`${apiUrl}/api/cv/${cvId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error: ${response.status}`);
                 }
