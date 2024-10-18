@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+
 const port = process.env.PORT || '1001';
 const apiUrl = process.env.apiUrl || 'http://localhost:3003';
 
-const RecommendationForm = ({ cvId, userId, onSuccess }) => { // Accept onSuccess as a prop
+const RecommendationForm = ({ cvId, userId }) => {
     const [recommendation, setRecommendation] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate hook
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,7 +21,8 @@ const RecommendationForm = ({ cvId, userId, onSuccess }) => { // Accept onSucces
 
             if (response.status === 201) {
                 setRecommendation(''); // Clear the input field on success
-                onSuccess(); // Call onSuccess to show the toast message and reload
+                // Navigate to a specific route after success
+                navigate(`/cvs`); // Replace '/success-page' with your target route
             }
         } catch (error) {
             console.error('Error adding recommendation:', error);
